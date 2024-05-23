@@ -374,16 +374,19 @@ func PrintVerification(ctx context.Context, verified []oci.Signature, output str
 				}
 			}
 
-			ui.Infof(ctx, "skipping sig.payload()...")
-			//p, err := sig.Payload()
-			//if err != nil {
-			//	fmt.Fprintf(os.Stderr, "Error fetching payload: %v", err)
-			//	return
-			//}
-			//fmt.Println(string(p))
+			ui.Infof(ctx, "sig.payload()...")
+			p, err := sig.Payload()
+			if err != nil {
+				fmt.Fprintf(os.Stderr, "Error fetching payload: %v", err)
+				return
+			}
+			ui.Infof(ctx, "sig.payload() ok")
+			fmt.Println(string(p))
+			ui.Infof(ctx, "payload print ok")
 		}
 
 	default:
+		ui.Infof(ctx, "PrintVerification output=default...")
 		var outputKeys []payload.SimpleContainerImage
 		for _, sig := range verified {
 			p, err := sig.Payload()
@@ -460,6 +463,7 @@ func PrintVerification(ctx context.Context, verified []oci.Signature, output str
 
 		fmt.Printf("\n%s\n", string(b))
 	}
+	ui.Infof(ctx, "PrintVerification ok")
 }
 
 func loadCertFromFileOrURL(path string) (*x509.Certificate, error) {

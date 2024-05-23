@@ -328,5 +328,6 @@ func (c *VerifyAttestationCommand) Exec(ctx context.Context, images []string) (e
 		PrintVerification(ctx, checked, "text")
 	}
 
+	ui.Infof(ctx, "VerifyAttestation ok")
 	return nil
 }
