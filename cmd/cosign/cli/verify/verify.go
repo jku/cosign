@@ -375,14 +375,14 @@ func PrintVerification(ctx context.Context, verified []oci.Signature, output str
 			}
 
 			ui.Infof(ctx, "sig.payload()...")
-			p, err := sig.Payload()
+			_, err := sig.Payload()
 			if err != nil {
 				fmt.Fprintf(os.Stderr, "Error fetching payload: %v", err)
 				return
 			}
 			ui.Infof(ctx, "sig.payload() ok")
-			fmt.Println(string(p))
-			ui.Infof(ctx, "payload print ok")
+			//fmt.Println(string(p))
+			ui.Infof(ctx, "skipped printing payload")
 		}
 
 	default:
